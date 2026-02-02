@@ -1,0 +1,244 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #111827, #020617);
+  color: #e5e7eb;
+  overflow-x: hidden;
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 70px;
+  background: rgba(2,6,23,0.9);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  z-index: 1000;
+  font-family: 'Orbitron', sans-serif;
+}
+
+nav .logo { color:#ef4444; letter-spacing:2px; }
+
+nav button {
+  background:none;
+  border:none;
+  color:#e5e7eb;
+  margin-left:20px;
+  cursor:pointer;
+  font-family:'Orbitron',sans-serif;
+  letter-spacing:1px;
+}
+
+nav button:hover { color:#ef4444; }
+
+.pages {
+  display:flex;
+  margin-top:70px; /* push below navbar */
+  transition: transform 0.7s ease-in-out;
+}
+
+.page {
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+  padding: 120px 60px;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+
+
+h1,h2 {
+  font-family:'Orbitron',sans-serif;
+  color:#ef4444;
+  letter-spacing:3px;
+}
+
+h1{ font-size:4rem; }
+h2{ margin-bottom:20px; }
+/* ===== F1 SPEED LINES BACKGROUND ===== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -60deg,
+    rgba(255,255,255,0.04) 0px,
+    rgba(255,255,255,0.04) 1px,
+    transparent 1px,
+    transparent 12px
+  );
+  animation: speedLines 6s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes speedLines {
+  from { background-position: 0 0; }
+  to { background-position: -600px 600px; }
+}
+
+/* Ensure content stays above background */
+nav, .pages {
+  position: relative;
+  z-index: 1;
+}
+/* ===== START ENGINE REV ANIMATION ===== */
+.cta.revving {
+  animation: engineRev 0.12s infinite alternate;
+  box-shadow:
+    0 0 15px #ef4444,
+    0 0 40px #f97316,
+    0 0 80px rgba(239,68,68,0.7);
+}
+
+@keyframes engineRev {
+  from {
+    transform: translateX(-1px) scale(1);
+  }
+  to {
+    transform: translateX(1px) scale(1.05);
+  }
+}
+
+
+.cta{
+  display:inline-block;
+  margin-top:30px;
+  padding:14px 36px;
+  background:linear-gradient(90deg,#ef4444,#f97316);
+  color:#020617;
+  font-family:'Orbitron',sans-serif;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.profile{ max-width:800px; border-left:4px solid #ef4444; padding-left:25px; }
+
+.skills{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:25px; }
+
+.skill{ padding:25px; background:rgba(255,255,255,0.05); border-top:4px solid #ef4444; }
+
+.project{ max-width:500px; background:rgba(255,255,255,0.05); padding:25px; border-top:5px solid #ef4444; }
+
+.project img{ width:100%; margin:15px 0; border-radius:8px; }
+
+@media(max-width:768px){
+  h1{font-size:2.6rem;}
+  h2{font-size:2rem;}
+  .page{padding:100px 30px;}
+}
+/* ===== SPEEDOMETERS ===== */
+.speedometers {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+
+  flex-wrap: nowrap;        /* 🔥 NO WRAPPING */
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Parent container */
+.speedo {
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+}
+.speedo span {
+  display: block;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+/* The dial wrapper */
+.dial {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05); /* base gray background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+/* Colored circle */
+.dial::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(#ef4444 0deg, #ef4444 0deg, rgba(255,255,255,0.05) 0deg);
+  transform: rotate(-90deg); /* start from top */
+  z-index: 1;
+  transition: background 0.2s ease;
+}
+
+/* Percentage text on top */
+.dial b {
+  position: relative; /* above ::before */
+  z-index: 2;
+  font-size: 1.3rem;
+  color: #e5e7eb;
+}
+
+/* ===== PIT STOP PROJECT ===== */
+.pitstop {
+  position: relative;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  overflow: hidden;
+}
+
+.pitstop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(239,68,68,0.15),
+    transparent 60%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.5s ease;
+}
+
+.pitstop:hover::before {
+  transform: translateX(120%);
+}
+
+.pitstop:hover {
+  transform: translateY(-14px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(239,68,68,0.35);
+}
+
+.telemetry {
+  margin-top: 15px;
+  opacity: 0.85;
+  font-family: 'Orbitron', sans-serif;
+}
+.page::-webkit-scrollbar {
+  width: 0;
+}
+.pages {
+  height: 100vh;
+  overflow: hidden;   /* 🔥 CRITICAL */
+}
+.tech-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+.speedo input[type="range"] {
+  width: 120px;
+  margin-top: 12px;
+  accent-color: #ef4444;
+  cursor: pointer;
+}
